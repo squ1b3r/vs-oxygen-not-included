@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="VS" type="RunExe" factoryName=".NET Executable">
+    <option name="EXE_PATH" value="/Applications/vintagestory.app/Vintagestory.exe" />
+    <option name="PROGRAM_PARAMETERS" value="--openWorld=&quot;testing-loc&quot; --addModPath=&quot;$PROJECT_DIR$/bin/Debug/&quot; --addOrigin=&quot;$PROJECT_DIR$/resources/assets&quot;" />
+    <option name="WORKING_DIRECTORY" value="/Applications/vintagestory.app" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <option name="USE_MONO" value="1" />
+    <option name="RUNTIME_ARGUMENTS" value="" />
+    <option name="RUNTIME_TYPE" value="mono" />
+    <method v="2">
+      <option name="Build Solution" enabled="true" />
+    </method>
+  </configuration>
+</component>

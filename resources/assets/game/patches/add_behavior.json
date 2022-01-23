@@ -1,0 +1,18 @@
+[
+  {
+    "file": "game:entities/humanoid/player.json",
+    "reason": "add",
+    "path": "/server/behaviors/-",
+    "value": { 
+      "code": "oni:air"
+    }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "reason": "add",
+    "path": "/client/behaviors/-",
+    "value": { 
+      "code": "oni:air"
+    }
+  }
+]
