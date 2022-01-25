@@ -11,8 +11,9 @@ Vintage Story Mod that adds a simple breathing system to the game
 ## Available Config Options
 ```
 "MaxAir": 100.0,
-"AirDepletionRate": 0.05, // percent of max air per second
-"AirRegenerationRate": 0.1 // percent of max air per second
+"AirDepletionRate": 0.05,               // percent of max air per second
+"AirRegenerationRate": 0.1              // percent of max air per second
+"AirBarVerticalAlignmentOffset": -10.0f // lesser number moves the bar up
 ```
 
 ## Todo (at some point)

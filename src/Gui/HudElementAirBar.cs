@@ -65,7 +65,7 @@ namespace OxygenNotIncluded.Gui
             }.WithFixedAlignmentOffset(0.0, 5.0);
 
             var airBarBounds = ElementStdBounds.Statbar(EnumDialogArea.RightTop, statsBarWidth)
-                .WithFixedAlignmentOffset(-2.0, -10.0)
+                .WithFixedAlignmentOffset(-2.0, OxygenNotIncludedMod.Config.AirBarVerticalAlignmentOffset)
                 .WithFixedHeight(10.0);
 
             var airBarParentBounds = statsBarBounds.FlatCopy().FixedGrow(0.0, 20.0);
