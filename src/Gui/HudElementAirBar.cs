@@ -12,7 +12,7 @@ namespace OxygenNotIncluded.Gui
         public HudElementAirBar(ICoreClientAPI capi) : base(capi)
         {
             capi.Event.RegisterGameTickListener(OnGameTick, 20);
-            capi.Event.RegisterGameTickListener(OnFlashStatbar, 1500);
+            capi.Event.RegisterGameTickListener(OnFlashStatbar, 1000);
         }
 
         private void OnGameTick(float dt)
@@ -26,7 +26,7 @@ namespace OxygenNotIncluded.Gui
 
             if (airTree != null && _statbar != null)
             {
-                _statbar.ShouldFlash = _statbar.GetValue() < 5.0;
+                _statbar.ShouldFlash = _statbar.GetValue() < OxygenNotIncludedMod.Config.MaxAir * 0.2f;
             }
         }
 
