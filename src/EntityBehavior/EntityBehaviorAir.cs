@@ -79,7 +79,7 @@ namespace OxygenNotIncluded.EntityBehavior
             }
             else
             {
-                ReduceAir();
+                ReduceAir(OxygenNotIncludedMod.Config.AirDepletionRate);
             }
 
             if (CurrentAir <= 0)
@@ -88,9 +88,20 @@ namespace OxygenNotIncluded.EntityBehavior
             }
         }
 
+        public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
+        {
+            if (!OxygenNotIncludedMod.Config.AirDepletesOnDamageReceived) return;
+            if (damageSource.Source is EnumDamageSource.Drown) return;
+            if (damageSource.Type is EnumDamageType.Suffocation) return;
+
+            ReduceAir(OxygenNotIncludedMod.Config.AirDepletionRate * 2);
+
+            base.OnEntityReceiveDamage(damageSource, ref damage);
+        }
+
         private void MarkDirty() => entity.WatchedAttributes.MarkPathDirty("oni:air");
 
-        private void ReduceAir() => CurrentAir -= MaxAir * OxygenNotIncludedMod.Config.AirDepletionRate;
+        private void ReduceAir(float depletionRate) => CurrentAir -= MaxAir * depletionRate;
 
         private void RegenerateAir() => CurrentAir += MaxAir * OxygenNotIncludedMod.Config.AirRegenerationRate;
 
