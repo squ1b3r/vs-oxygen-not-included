@@ -17,6 +17,7 @@ Vintage Story Mod that adds a simple breathing system to the game
 
 "AirDepletesOnDamageReceived": true     // lose air when damaged?
 
+"AirBarHorizontalAlignmentRight": true  // set to false to align the air bar to the left
 "AirBarVerticalAlignmentOffset": -10.0f // lesser number moves the bar up
 ```
 

@@ -47,10 +47,21 @@ namespace OxygenNotIncluded.Gui
             _statbar.SetValues(currentAir.Value, 0.0f, maxAir);
         }
 
+        private ElementBounds GetStatsBarBounds(float statsBarWidth)
+        {
+            var isRight = OxygenNotIncludedMod.Config.AirBarHorizontalAlignmentRight;
+            var alignment = isRight ? EnumDialogArea.RightTop : EnumDialogArea.LeftTop;
+            var alignmentOffsetX = isRight ? -2.0 : 1.0;
+
+            return ElementStdBounds.Statbar(alignment, statsBarWidth)
+                .WithFixedAlignmentOffset(alignmentOffsetX, OxygenNotIncludedMod.Config.AirBarVerticalAlignmentOffset)
+                .WithFixedHeight(10.0);
+        }
+
         private void ComposeGuis()
         {
-            const double statsBarParentWidth = 850;
-            const double statsBarWidth = statsBarParentWidth * 0.41;
+            const float statsBarParentWidth = 850f;
+            const float statsBarWidth = statsBarParentWidth * 0.41f;
 
             double[] airBarColor = {0, 0.4, 0.5, 0.5};
 
@@ -64,10 +75,7 @@ namespace OxygenNotIncluded.Gui
                 fixedHeight = 100.0
             }.WithFixedAlignmentOffset(0.0, 5.0);
 
-            var airBarBounds = ElementStdBounds.Statbar(EnumDialogArea.RightTop, statsBarWidth)
-                .WithFixedAlignmentOffset(-2.0, OxygenNotIncludedMod.Config.AirBarVerticalAlignmentOffset)
-                .WithFixedHeight(10.0);
-
+            var airBarBounds = GetStatsBarBounds(statsBarWidth);
             var airBarParentBounds = statsBarBounds.FlatCopy().FixedGrow(0.0, 20.0);
 
             Composers["oni:airbar"] = capi.Gui.CreateCompo("oni:statbar", airBarParentBounds)

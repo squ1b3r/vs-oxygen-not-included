@@ -5,7 +5,7 @@
   "description": "Adds a simple breathing system to the game",
   "website": "https://github.com/squ1b3r/vs-oxygen-not-included",
   "authors": ["Shoujiro"],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependency": {
     "game": "1.15.10",
     "survival": "1.15.10"

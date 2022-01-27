@@ -8,6 +8,7 @@ namespace OxygenNotIncluded
 
         public bool AirDepletesOnDamageReceived = true; // lose air on damage received?
 
+        public bool AirBarHorizontalAlignmentRight = true; // set to false to align the air bar to the left
         public float AirBarVerticalAlignmentOffset = -10.0f; // lesser number moves the bar up
     }
 }
