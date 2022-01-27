@@ -47,17 +47,6 @@ namespace OxygenNotIncluded.Gui
             _statbar.SetValues(currentAir.Value, 0.0f, maxAir);
         }
 
-        private ElementBounds GetStatsBarBounds(float statsBarWidth)
-        {
-            var isRight = OxygenNotIncludedMod.Config.AirBarHorizontalAlignmentRight;
-            var alignment = isRight ? EnumDialogArea.RightTop : EnumDialogArea.LeftTop;
-            var alignmentOffsetX = isRight ? -2.0 : 1.0;
-
-            return ElementStdBounds.Statbar(alignment, statsBarWidth)
-                .WithFixedAlignmentOffset(alignmentOffsetX, OxygenNotIncludedMod.Config.AirBarVerticalAlignmentOffset)
-                .WithFixedHeight(10.0);
-        }
-
         private void ComposeGuis()
         {
             const float statsBarParentWidth = 850f;
@@ -75,18 +64,29 @@ namespace OxygenNotIncluded.Gui
                 fixedHeight = 100.0
             }.WithFixedAlignmentOffset(0.0, 5.0);
 
-            var airBarBounds = GetStatsBarBounds(statsBarWidth);
+            var isRight = OxygenNotIncludedMod.Config.AirBarHorizontalAlignmentRight;
+            var alignment = isRight ? EnumDialogArea.RightTop : EnumDialogArea.LeftTop;
+            var alignmentOffsetX = isRight ? -2.0 : 1.0;
+
+            var airBarBounds = ElementStdBounds.Statbar(alignment, statsBarWidth)
+                .WithFixedAlignmentOffset(alignmentOffsetX, OxygenNotIncludedMod.Config.AirBarVerticalAlignmentOffset)
+                .WithFixedHeight(10.0);
+
             var airBarParentBounds = statsBarBounds.FlatCopy().FixedGrow(0.0, 20.0);
 
-            Composers["oni:airbar"] = capi.Gui.CreateCompo("oni:statbar", airBarParentBounds)
+            var composer = capi.Gui.CreateCompo("oni:statbar", airBarParentBounds);
+
+            _statbar = new GuiElementStatbar(composer.Api, airBarBounds, airBarColor, isRight);
+
+            composer
                 .BeginChildElements(statsBarBounds)
                 .AddIf(airTree != null)
-                .AddInvStatbar(airBarBounds, airBarColor, "airstatsbar")
+                .AddInteractiveElement(_statbar, "airstatsbar")
                 .EndIf()
                 .EndChildElements()
                 .Compose();
 
-            _statbar = Composers["oni:airbar"].GetStatbar("airstatsbar");
+            Composers["oni:airbar"] = composer;
 
             TryOpen();
         }
