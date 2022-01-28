@@ -1,3 +1,4 @@
+using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
@@ -111,12 +112,21 @@ namespace OxygenNotIncluded.EntityBehavior
 
         private bool IsBuried() => entity.OnGround && !IsHeadBlockBreathable();
 
+        /// <summary>
+        /// Defines whether or not the head block is breathable
+        /// </summary>
+        /// <returns>
+        /// Returns true if the block is air or is a none-solid block which is also not liquid
+        /// </returns>
         private bool IsHeadBlockBreathable()
         {
             var head = entity.SidedPos.XYZ.AddCopy(0, entity.CollisionBox.Height, 0);
             var headBlock = entity.World.BlockAccessor.GetBlock(head.AsBlockPos);
 
-            return headBlock.BlockMaterial == EnumBlockMaterial.Air;
+            var isSolidBlock = !headBlock.SideSolid.Contains(false);
+            var isLiquidBlock = headBlock.IsLiquid();
+
+            return (headBlock.BlockMaterial == EnumBlockMaterial.Air || !isSolidBlock) && !isLiquidBlock;
         }
 
         private void Suffocate()
