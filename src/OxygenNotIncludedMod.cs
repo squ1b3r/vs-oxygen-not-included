@@ -9,7 +9,7 @@ using OxygenNotIncluded.Gui;
     Description = "Adds a simple breathing system to the game",
     Website = "https://github.com/squ1b3r/vs-oxygen-not-included",
     Authors = new[] {"Shoujiro"},
-    Version = "0.2.2")]
+    Version = "0.2.3")]
 
 namespace OxygenNotIncluded
 {

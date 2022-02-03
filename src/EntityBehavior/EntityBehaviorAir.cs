@@ -60,13 +60,15 @@ namespace OxygenNotIncluded.EntityBehavior
 
         public override void OnGameTick(float deltaTime)
         {
+            if (entity.State != EnumEntityState.Active) return;
+
             if (!(entity is EntityPlayer player)) return;
 
             if (!entity.Alive) return;
 
-            var gameMode = player.World.PlayerByUid(player.PlayerUID).WorldData.CurrentGameMode;
+            var gameMode = player?.Player?.WorldData?.CurrentGameMode;
 
-            if (gameMode == EnumGameMode.Creative || gameMode == EnumGameMode.Spectator) return;
+            if (gameMode != EnumGameMode.Survival) return;
 
             _secondsSinceLastUpdate += deltaTime;
 
