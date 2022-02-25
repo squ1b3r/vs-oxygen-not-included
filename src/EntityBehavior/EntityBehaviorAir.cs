@@ -93,13 +93,17 @@ namespace OxygenNotIncluded.EntityBehavior
 
         public override void OnEntityReceiveDamage(DamageSource damageSource, ref float damage)
         {
+            base.OnEntityReceiveDamage(damageSource, ref damage);
+
             if (!OxygenNotIncludedMod.Config.AirDepletesOnDamageReceived) return;
-            if (damageSource.Source is EnumDamageSource.Drown) return;
-            if (damageSource.Type is EnumDamageType.Suffocation) return;
+
+            if (entity.World.Side != EnumAppSide.Server) return;
+
+            if (damageSource.Source == EnumDamageSource.Drown) return;
+            if (damageSource.Type == EnumDamageType.Suffocation) return;
+            if (damageSource.Type == EnumDamageType.Heal) return;
 
             ReduceAir(OxygenNotIncludedMod.Config.AirDepletionRate * 2);
-
-            base.OnEntityReceiveDamage(damageSource, ref damage);
         }
 
         private void MarkDirty() => entity.WatchedAttributes.MarkPathDirty("oni:air");
